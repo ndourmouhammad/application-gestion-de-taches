@@ -1,7 +1,6 @@
 <?php
 // Démarrer la session
-session_start();
-
+//session_start();
 // Vérifie si l'utilisateur est connecté
 if (isset($_SESSION['utilisateur'])) {
     // Récupère les informations de l'utilisateur
@@ -26,18 +25,32 @@ if (isset($_SESSION['utilisateur'])) {
         <a href="addIdea.php">Ajouter une tâche</a>
     </nav>
     <nav class="navbar2">
+    <a href="#"><?= $utilisateur['prenom']; ?> <?= $utilisateur['nom']; ?></a>
         <a href="index.php?page=deconnecter">Déconnexion</a>
-        <!-- Affiche le nom de l'utilisateur -->
-        <a href="#"><?= $utilisateur['prenom'] . ' ' . $utilisateur['nom']; ?></a>
     </nav>
-    <p>
-        <?php
-        // Parcourir et afficher les utilisateurs
-    foreach ($utilisateurs as $utilisateur) {
-        echo $utilisateur['nom'] . ' ' . $utilisateur['prenom'] . ' - ' . $utilisateur['email'] . '<br>';
-    }
-        ?>
-    </p>
+    <div class="container">
+        <h1>Mes tâches</h1>
+        <table>
+            <tr>
+                <th>Tâche</th>
+                <th>Description</th>
+                <th>Date d'échéance</th>
+                <th>Priorité</th>
+                <th>Etat</th>
+            </tr>
+            <?php foreach ($taches as $tache) : ?>
+                    <tr>
+                        <td><?= $tache->libelle ?></td>
+                        <td><?= $tache->description ?></td>
+                        <td><?= $tache->date ?></td>
+                        <td><?= $tache->priorite ?></td>
+                        <td><?= $tache->etat ?></td>
+                        
+                    </tr>
+                <?php endforeach; ?>
+        </table>
+    </div>
+  
 </header>
 </body>
 </html>

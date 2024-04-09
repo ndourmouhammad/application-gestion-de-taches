@@ -141,20 +141,37 @@ class Utilisateur
     }
 
 
-    public function listerUtilisateurs()
-    {
-        try {
-            // Préparer la requête SQL pour récupérer tous les utilisateurs
-            $sql = "SELECT * FROM Utilisateur";
-            $req = $this->connexion->query($sql);
-
-            // Récupérer tous les utilisateurs sous forme de tableau associatif
-            $utilisateurs = $req->fetchAll(PDO::FETCH_ASSOC);
-
-            return $utilisateurs;
-        } catch (PDOException $e) {
-            // Gestion des erreurs
-            die('Erreur lors de la récupération des utilisateurs : ' . $e->getMessage());
+    public function listerTaches()
+{
+    try {
+        // Démarrer la session si ce n'est pas déjà fait
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
         }
+        
+        // Vérifier si l'utilisateur est connecté
+        if (isset($_SESSION['utilisateur']) && isset($_SESSION['utilisateur']['id'])) {
+            $userId = $_SESSION['utilisateur']['id'];
+
+            // Préparer la requête SQL pour récupérer les tâches de l'utilisateur connecté
+            $sql = "SELECT * FROM taches WHERE id_utilisateur = :userId";
+            $req = $this->connexion->prepare($sql);
+            $req->bindValue(':userId', $userId);
+            $req->execute();
+
+            // Récupérer toutes les tâches de l'utilisateur sous forme de tableau associatif
+            $taches = $req->fetchAll(PDO::FETCH_OBJ);
+
+            return $taches;
+        } else {
+            // Gérer le cas où aucun utilisateur n'est connecté
+            // Par exemple, rediriger vers la page de connexion
+            header("Location: index.php?page=connecter");
+            exit();
+        }
+    } catch (PDOException $e) {
+        // Gestion des erreurs
+        die('Erreur lors de la récupération des tâches : ' . $e->getMessage());
     }
+}
 }
