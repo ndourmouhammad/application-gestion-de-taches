@@ -55,13 +55,14 @@ function lister()
 {
     global $user;
     // Appel de la méthode pour lister les utilisateurs
-    $utilisateurs = $user->listerUtilisateurs();
+    $taches = $user->listerTaches();
     include_once('./view/espaceUser.php');
 }
 
 function deconnexion()
 {
     global $user;
+    
     // Appel de la méthode de déconnexion
     $user->deconnexion();
     include_once('./view/deconnexion.php');
