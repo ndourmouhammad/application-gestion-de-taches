@@ -22,6 +22,10 @@
                 <input type="email" id="email" name="email" required>
             </p>
             <p>
+                <label for="mdp">Mot de passe :</label>
+                <input type="text" id="mdp" name="mdp" required>
+            </p>
+            <p>
                 <label for="telephone">Telephone :</label>
                 <input type="tel" id="telephone" name="telephone" required>
             </p>
