@@ -1,6 +1,6 @@
 <?php
 
-define('DSN', 'mysql:host=localhost;dbanme=gestion_taches;charset=utf8');
+define('DSN', 'mysql:host=localhost;dbname=gestion_taches;charset=utf8');
 define('USER', 'root');
 define('PASSWORD', '');
 
@@ -10,5 +10,3 @@ try {
 } catch (PDOException $e) {
     die('Erreur : '.$e->getMessage());
 }
-
-
