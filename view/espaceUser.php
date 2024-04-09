@@ -1,7 +1,6 @@
 <?php
 // Démarrer la session
-session_start();
-
+//session_start();
 // Vérifie si l'utilisateur est connecté
 if (isset($_SESSION['utilisateur'])) {
     // Récupère les informations de l'utilisateur
@@ -13,31 +12,52 @@ if (isset($_SESSION['utilisateur'])) {
 }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./public/user.css">
     <title>Gestionnaire des tâches</title>
 </head>
 <body>
-<header>
-    <nav class="navbar1">
-        <a href="index.php">Mes tâches</a>
-        <a href="addIdea.php">Ajouter une tâche</a>
-    </nav>
-    <nav class="navbar2">
-        <a href="index.php?page=deconnecter">Déconnexion</a>
-        <!-- Affiche le nom de l'utilisateur -->
-        <a href="#"><?= $utilisateur['prenom'] . ' ' . $utilisateur['nom']; ?></a>
-    </nav>
-    <p>
-        <?php
-        // Parcourir et afficher les utilisateurs
-    foreach ($utilisateurs as $utilisateur) {
-        echo $utilisateur['nom'] . ' ' . $utilisateur['prenom'] . ' - ' . $utilisateur['email'] . '<br>';
-    }
-        ?>
-    </p>
-</header>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="index.php">Gestionnaire de tâches</a>
+            </div>
+            <div class="user-info">
+                <span>Bienvenue, <?= $utilisateur['prenom']; ?> <?= $utilisateur['nom']; ?></span>
+                <a href="index.php?page=deconnecter">Déconnexion</a>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div class="container">
+            <h1>Mes Tâches</h1>
+            <a href="addIdea.php" class="btn-add-task">Ajouter une tâche</a>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Tâche</th>
+                        <th>Description</th>
+                        <th>Date d'échéance</th>
+                        <th>Priorité</th>
+                        <th>État</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($taches as $tache) : ?>
+                        <tr>
+                            <td><?= $tache->libelle ?></td>
+                            <td><?= $tache->description ?></td>
+                            <td><?= $tache->date ?></td>
+                            <td><?= $tache->priorite ?></td>
+                            <td><?= $tache->etat ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+    </main>
 </body>
 </html>
