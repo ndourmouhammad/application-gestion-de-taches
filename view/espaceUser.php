@@ -12,45 +12,52 @@ if (isset($_SESSION['utilisateur'])) {
 }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./public/user.css">
     <title>Gestionnaire des tâches</title>
 </head>
 <body>
-<header>
-    <nav class="navbar1">
-        <a href="index.php">Mes tâches</a>
-        <a href="addIdea.php">Ajouter une tâche</a>
-    </nav>
-    <nav class="navbar2">
-    <a href="#"><?= $utilisateur['prenom']; ?> <?= $utilisateur['nom']; ?></a>
-        <a href="index.php?page=deconnecter">Déconnexion</a>
-    </nav>
-    <div class="container">
-        <h1>Mes tâches</h1>
-        <table>
-            <tr>
-                <th>Tâche</th>
-                <th>Description</th>
-                <th>Date d'échéance</th>
-                <th>Priorité</th>
-                <th>Etat</th>
-            </tr>
-            <?php foreach ($taches as $tache) : ?>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="index.php">Gestionnaire de tâches</a>
+            </div>
+            <div class="user-info">
+                <span>Bienvenue, <?= $utilisateur['prenom']; ?> <?= $utilisateur['nom']; ?></span>
+                <a href="index.php?page=deconnecter">Déconnexion</a>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div class="container">
+            <h1>Mes Tâches</h1>
+            <a href="addIdea.php" class="btn-add-task">Ajouter une tâche</a>
+            <table>
+                <thead>
                     <tr>
-                        <td><?= $tache->libelle ?></td>
-                        <td><?= $tache->description ?></td>
-                        <td><?= $tache->date ?></td>
-                        <td><?= $tache->priorite ?></td>
-                        <td><?= $tache->etat ?></td>
-                        
+                        <th>Tâche</th>
+                        <th>Description</th>
+                        <th>Date d'échéance</th>
+                        <th>Priorité</th>
+                        <th>État</th>
                     </tr>
-                <?php endforeach; ?>
-        </table>
-    </div>
-  
-</header>
+                </thead>
+                <tbody>
+                    <?php foreach ($taches as $tache) : ?>
+                        <tr>
+                            <td><?= $tache->libelle ?></td>
+                            <td><?= $tache->description ?></td>
+                            <td><?= $tache->date ?></td>
+                            <td><?= $tache->priorite ?></td>
+                            <td><?= $tache->etat ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+    </main>
 </body>
 </html>
