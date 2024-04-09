@@ -15,6 +15,9 @@ if (isset($_GET['page'])) {
     } elseif ($_GET['page'] == 'connecter') {
         // Afficher le formulaire de connexion
         connecter();
+    } elseif ($_GET['page'] == 'deconnecter') {
+        // Afficher le formulaire de connexion
+        deconnexion();
     } 
 } else {
     // Si aucune page spécifiée, afficher le formulaire de connexion par défaut

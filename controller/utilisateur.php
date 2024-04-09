@@ -58,3 +58,11 @@ function lister()
     $utilisateurs = $user->listerUtilisateurs();
     include_once('./view/espaceUser.php');
 }
+
+function deconnexion()
+{
+    global $user;
+    // Appel de la méthode de déconnexion
+    $user->deconnexion();
+    include_once('./view/deconnexion.php');
+}

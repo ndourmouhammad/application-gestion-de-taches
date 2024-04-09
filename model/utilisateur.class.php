@@ -12,7 +12,7 @@ class Utilisateur
     private $adresse;
     private $connexion;
 
-    public function __construct($nom, $prenom, $email, $mdp , $telephone, $adresse, $connexion)
+    public function __construct($nom, $prenom, $email, $mdp, $telephone, $adresse, $connexion)
     {
         $this->connexion = $connexion;
         $this->nom = $nom;
@@ -70,34 +70,34 @@ class Utilisateur
 
 
     public function inscription($nom, $prenom, $email, $mdp, $telephone, $adresse)
-{
-    try {
-        // Hacher le mot de passe
-        $mdp_hache = password_hash($mdp, PASSWORD_DEFAULT);
+    {
+        try {
+            // Hacher le mot de passe
+            $mdp_hache = password_hash($mdp, PASSWORD_DEFAULT);
 
-        // Préparer la requête SQL
-        $sql = "INSERT INTO Utilisateur (nom, prenom, email, mdp, telephone, adresse) VALUES (:nom, :prenom, :email, :mdp, :telephone, :adresse)";
-        $req = $this->connexion->prepare($sql);
+            // Préparer la requête SQL
+            $sql = "INSERT INTO Utilisateur (nom, prenom, email, mdp, telephone, adresse) VALUES (:nom, :prenom, :email, :mdp, :telephone, :adresse)";
+            $req = $this->connexion->prepare($sql);
 
-        // Liaison des valeurs avec les paramètres de la requête
-        $req->bindValue(':nom', $nom);
-        $req->bindValue(':prenom', $prenom);
-        $req->bindValue(':email', $email);
-        $req->bindValue(':mdp', $mdp_hache); // Utilisation du mot de passe haché
-        $req->bindValue(':adresse', $adresse);
-        $req->bindValue(':telephone', $telephone, PDO::PARAM_INT);
+            // Liaison des valeurs avec les paramètres de la requête
+            $req->bindValue(':nom', $nom);
+            $req->bindValue(':prenom', $prenom);
+            $req->bindValue(':email', $email);
+            $req->bindValue(':mdp', $mdp_hache); // Utilisation du mot de passe haché
+            $req->bindValue(':adresse', $adresse);
+            $req->bindValue(':telephone', $telephone, PDO::PARAM_INT);
 
-        // Exécution de la requête
-        $req->execute();
+            // Exécution de la requête
+            $req->execute();
 
-        // Redirection après l'inscription
-        header("location: index.php");
-        exit();
-    } catch (PDOException $e) {
-        // Gestion des erreurs
-        die('Erreur lors de l\'inscription : ' . $e->getMessage());
+            // Redirection après l'inscription
+            header("location: index.php");
+            exit();
+        } catch (PDOException $e) {
+            // Gestion des erreurs
+            die('Erreur lors de l\'inscription : ' . $e->getMessage());
+        }
     }
-}
 
 
     public function authentification($email, $mdp)
@@ -108,10 +108,10 @@ class Utilisateur
             $req = $this->connexion->prepare($sql);
             $req->bindParam(':email', $email);
             $req->execute();
-            
+
             // Récupération de l'utilisateur
             $utilisateur = $req->fetch(PDO::FETCH_ASSOC);
-            
+
             // Vérification du mot de passe
             if ($utilisateur && password_verify($mdp, $utilisateur['mdp'])) {
                 // Démarrage de la session
@@ -126,22 +126,35 @@ class Utilisateur
             die('Erreur lors de l\'authentification : ' . $e->getMessage());
         }
     }
-    
-    public function listerUtilisateurs()
-{
-    try {
-        // Préparer la requête SQL pour récupérer tous les utilisateurs
-        $sql = "SELECT * FROM Utilisateur";
-        $req = $this->connexion->query($sql);
-        
-        // Récupérer tous les utilisateurs sous forme de tableau associatif
-        $utilisateurs = $req->fetchAll(PDO::FETCH_ASSOC);
-        
-        return $utilisateurs;
-    } catch (PDOException $e) {
-        // Gestion des erreurs
-        die('Erreur lors de la récupération des utilisateurs : ' . $e->getMessage());
-    }
-}
 
+    public function deconnexion()
+    {
+        // Démarrer la session si ce n'est pas déjà fait
+        session_start();
+
+        // Détruire toutes les données de session
+        session_destroy();
+
+        // Rediriger vers une page après la déconnexion, par exemple la page de connexion
+        header("Location: index.php?page=connecter");
+        exit(); // Assure que le script s'arrête après la redirection
+    }
+
+
+    public function listerUtilisateurs()
+    {
+        try {
+            // Préparer la requête SQL pour récupérer tous les utilisateurs
+            $sql = "SELECT * FROM Utilisateur";
+            $req = $this->connexion->query($sql);
+
+            // Récupérer tous les utilisateurs sous forme de tableau associatif
+            $utilisateurs = $req->fetchAll(PDO::FETCH_ASSOC);
+
+            return $utilisateurs;
+        } catch (PDOException $e) {
+            // Gestion des erreurs
+            die('Erreur lors de la récupération des utilisateurs : ' . $e->getMessage());
+        }
+    }
 }
