@@ -25,3 +25,23 @@ function ajoutTache($id, $libelle, $description, $date, $priorite, $etat)
     $ajout = $tache->ajouterTache($libelle, $description, $date, $priorite, $etat);
     include_once('./view/ajouter.php');
 }
+
+
+function modifierTache($id)
+{
+    global $tache;
+
+    // Appeler la fonction pour marquer la tâche comme terminée
+    $tache->marquerTacheTerminee($id);
+
+    // Redirection avec un délai de 1 seconde (1000 millisecondes)
+    header("location: index.php");
+}
+
+function supprimerTache($id)
+{
+    global $tache;
+
+    $supp = $tache->delete($id);
+}
+
