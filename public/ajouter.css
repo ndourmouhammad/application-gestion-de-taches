@@ -1,9 +1,11 @@
+/* Réinitialisation des styles de base */
 body {
     margin: 0;
     font-family: Arial, sans-serif;
     background-color: #f8f9fa;
 }
 
+/* Styles pour l'en-tête */
 header {
     background-color: #3f87a6;
     color: #fff;
@@ -32,13 +34,16 @@ header {
     margin-right: 10px;
     font-size: 1.3rem;
 }
+
 .user-info a {
     color: #fff;
     text-decoration: none;
     font-size: 1.3rem;
 }
+
+/* Styles pour le conteneur principal */
 .container {
-    max-width: 80%;
+    max-width: 60%;
     margin: 20px auto;
     padding: 20px;
     background-color: #fff;
@@ -46,50 +51,45 @@ header {
     border-radius: 10px;
 }
 
+/* Styles pour les titres */
 h1 {
     margin-top: 0;
     color: #3f87a6;
 }
 
-.btn-add-task {
-    display: inline-block;
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 20px;
-    text-decoration: none;
-    border-radius: 5px;
+/* Styles pour les groupes de formulaires */
+.form-group {
     margin-bottom: 20px;
 }
 
-.btn-add-task:hover {
+/* Styles pour les étiquettes de formulaire */
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+/* Styles pour les champs de formulaire */
+input[type="text"],
+textarea,
+select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Styles pour le bouton d'ajout */
+input[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
     background-color: #45a049;
 }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-th, td {
-    padding: 15px;
-    text-align: left;
-    border-bottom: 2px solid #3f87a6;
-}
-
-th {
-    background-color: #3f87a6;
-    color: #fff;
-}
-
-tbody tr:hover {
-    background-color: #e9f1f7;
-    transition: background-color 0.3s ease;
-}
-td {
-    text-align: center; /* Centre le contenu dans les cellules */
-}
-
-img {
-    width: 30px; /* Définit la largeur des images */
-    height: auto; /* Permet à la hauteur de s'ajuster automatiquement en fonction de la largeur */
-}

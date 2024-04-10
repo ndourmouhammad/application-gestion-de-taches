@@ -13,12 +13,14 @@ if (isset($_SESSION['utilisateur'])) {
 ?>
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./public/user.css">
     <title>Gestionnaire des tâches</title>
 </head>
+
 <body>
     <header>
         <nav class="navbar">
@@ -34,7 +36,7 @@ if (isset($_SESSION['utilisateur'])) {
     <main>
         <div class="container">
             <h1>Mes Tâches</h1>
-            <a href="addIdea.php" class="btn-add-task">Ajouter une tâche</a>
+            <a href="index.php?page=add-task" class="btn-add-task">Ajouter une tâche</a>
             <table>
                 <thead>
                     <tr>
@@ -43,6 +45,8 @@ if (isset($_SESSION['utilisateur'])) {
                         <th>Date d'échéance</th>
                         <th>Priorité</th>
                         <th>État</th>
+                        <th>Marquer comme terminé</th>
+                        <th>Supprimer</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -53,6 +57,8 @@ if (isset($_SESSION['utilisateur'])) {
                             <td><?= $tache->date ?></td>
                             <td><?= $tache->priorite ?></td>
                             <td><?= $tache->etat ?></td>
+                            <td><a href="#"><img src="./public/img/done.svg"></a></td>
+                            <td><a href="#"><img src="./public/img/trash.svg"></a></td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
@@ -60,4 +66,5 @@ if (isset($_SESSION['utilisateur'])) {
         </div>
     </main>
 </body>
+
 </html>
