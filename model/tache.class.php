@@ -61,5 +61,28 @@ class Tache
     }
 }
 
+// Fonction pour mettre à jour l'état d'une tâche
+public function marquerTacheTerminee($id)
+{
+    try {
+        // Préparer la requête SQL pour mettre à jour l'état de la tâche
+        $sql = "UPDATE taches SET etat = 'terminé' WHERE id = :id";
+        $req = $this->connexion->prepare($sql);
+        
+        // Liaison des paramètres
+        $req->bindParam(':id', $id, PDO::PARAM_INT);
+        
+        // Exécuter la requête
+        $req->execute();
+        
+        // Pas de redirection ici
+    } catch (PDOException $e) {
+        // Gérer les erreurs de base de données
+        die("Erreur lors de la mise à jour de l'état de la tâche : " . $e->getMessage());
+    }
+}
+
+
+
     
 }
