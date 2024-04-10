@@ -57,8 +57,8 @@ if (isset($_SESSION['utilisateur'])) {
                             <td><?= $tache->date ?></td>
                             <td><?= $tache->priorite ?></td>
                             <td><?= $tache->etat ?></td>
-                            <td><a href="#"><img src="./public/img/done.svg"></a></td>
-                            <td><a href="#"><img src="./public/img/trash.svg"></a></td>
+                            <td><a href="index.php?page=update-task&id=<?= $tache->id ?>"><img src="./public/img/done.svg"></a></td>
+                            <td><a href="index.php?page=delete-task&id=<?= $tache->id ?>"><img src="./public/img/trash.svg"></a></td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
