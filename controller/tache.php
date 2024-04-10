@@ -35,7 +35,13 @@ function modifierTache($id)
     $tache->marquerTacheTerminee($id);
 
     // Redirection avec un délai de 1 seconde (1000 millisecondes)
-    header("refresh:1; url=index.php");
+    header("location: index.php");
 }
 
+function supprimerTache($id)
+{
+    global $tache;
+
+    $supp = $tache->delete($id);
+}
 

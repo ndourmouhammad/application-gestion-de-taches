@@ -82,7 +82,17 @@ public function marquerTacheTerminee($id)
     }
 }
 
+public function delete($id)
+    {
 
+        $sql = 'DELETE FROM taches WHERE id = :id';
+        $req = $this->connexion->prepare($sql);
+        $req->bindValue(':id', $id, PDO::PARAM_INT);
+        $req->execute();
+
+        header("location: index.php");
+        exit();
+    }
 
     
 }

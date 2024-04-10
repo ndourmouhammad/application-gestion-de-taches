@@ -48,7 +48,13 @@ if (isset($_GET['page'])) {
                 // Modification de la tâche avec l'ID spécifié
                 modifierTache($id);
             } 
-
+            break;
+        case 'delete-task':
+            if (isset($_GET['id'])) {
+                $id = $_GET['id'];
+                // Modification de la tâche avec l'ID spécifié
+                supprimerTache($id);
+            } 
         default:
             // Si la page demandée n'est pas reconnue, afficher la liste des tâches par défaut
             lister();
