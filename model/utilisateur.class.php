@@ -1,9 +1,12 @@
 <?php
 
 require_once('./config.php');
+require_once('validation.trait.php');
 
 class Utilisateur
 {
+    use Validation;
+
     private $nom;
     private $prenom;
     private $email;

@@ -1,10 +1,11 @@
 <?php
 
 require_once('./config.php');
-
+require_once('validation.trait.php');
 class Tache
 {
-  
+    use Validation;
+    
     private $libelle;
     private $description;
     private $date;
