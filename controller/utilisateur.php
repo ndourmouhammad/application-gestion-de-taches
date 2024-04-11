@@ -23,8 +23,13 @@ function inscrireUser($nom, $prenom, $email, $mdp, $telephone, $adresse)
     $telephone = $_POST['telephone'];
     $adresse = $_POST['adresse'];
 
-    $inscrire = $user->inscription($nom, $prenom, $email, $mdp, $telephone, $adresse);
+    if ($user->validerNom($nom) && $user->validerNom($prenom) && $user->validerEmail($email) && $user->valider_mot_de_passe($mdp) && $user->validerTelephone($telephone) && $user->sanitize_string($adresse)) {
+        $inscrire = $user->inscription($nom, $prenom, $email, $mdp, $telephone, $adresse);
     include_once('./view/inscription.php');
+    } else {
+        echo 'Données invalides. Veuillez vérifier à nouveau avant de soumettre';
+    }
+    
 }
 
 function connecter()

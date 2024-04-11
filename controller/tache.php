@@ -22,8 +22,12 @@ function ajoutTache($id, $libelle, $description, $date, $priorite, $etat)
     $priorite = $_POST['priorite'];
     $etat = $_POST['etat'];
 
-    $ajout = $tache->ajouterTache($libelle, $description, $date, $priorite, $etat);
-    include_once('./view/ajouter.php');
+    if ($tache->sanitize_string($libelle) && $tache->sanitize_string($description)) {
+        $ajout = $tache->ajouterTache($libelle, $description, $date, $priorite, $etat);
+        include_once('./view/ajouter.php');
+    } else {
+        echo 'Données invalides. Veuillez vérifier à nouveau avant de soumettre';
+    }
 }
 
 
@@ -44,4 +48,3 @@ function supprimerTache($id)
 
     $supp = $tache->delete($id);
 }
-
